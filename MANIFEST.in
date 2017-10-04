@@ -1,1 +1,1 @@
-include .project_metadata.json
+include .project_metadata.py
