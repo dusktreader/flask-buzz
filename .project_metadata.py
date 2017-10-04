@@ -1,10 +1,10 @@
 {
-    "name": "flask-buzz",
-    "author_email": "tucker.beck@gmail.com",
-    "author": "Tucker Beck",
-    "copyright": "2017, Tucker Beck",
-    "description": "Extra bindings on py-buzz specifically for flask apps",
-    "version": "0.1",
-    "license": "MIT",
-    "release": "0.1.0",
+    'author': 'Tucker Beck',
+    'author_email': 'tucker.beck@gmail.com',
+    'copyright': '2017, Tucker Beck',
+    'description': 'Extra bindings on py-buzz specifically for flask apps',
+    'license': 'MIT',
+    'name': 'flask-buzz',
+    'release': '0.1.1',
+    'version': '0.1',
 }
