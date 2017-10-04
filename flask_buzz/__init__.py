@@ -10,7 +10,7 @@ class FlaskBuzz(buzz.Buzz):
     headers = None
 
     def __str__(self):
-        return "{super_str} (status_code)".format(
+        return "{super_str} ({status_code})".format(
             super_str=super().__str__(),
             status_code=self.status_code,
         )
