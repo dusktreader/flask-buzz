@@ -5,6 +5,6 @@
     'description': 'Extra bindings on py-buzz specifically for flask apps',
     'license': 'MIT',
     'name': 'flask-buzz',
-    'release': '0.1.2',
+    'release': '0.1.3',
     'version': '0.1',
 }
