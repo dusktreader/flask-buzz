@@ -30,6 +30,11 @@ def app():
 
 class TestFlaskBuzz:
 
+    def test_raise(self):
+        with pytest.raises(flask_buzz.FlaskBuzz) as err_info:
+            raise flask_buzz.FlaskBuzz('i failed')
+        assert 'i failed' in str(err_info.value)
+
     def test_basic_functionality(self, app):
         """
         This test verifies that the basic functionality of FlaskBuzz works
