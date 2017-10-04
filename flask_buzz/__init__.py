@@ -11,8 +11,8 @@ class FlaskBuzz(buzz.Buzz):
 
     def __str__(self):
         return "{super_str} (status_code)".format(
-            super().__str__(),
-            self.status_code,
+            super_str=super().__str__(),
+            status_code=self.status_code,
         )
 
     def jsonify(self, status_code=None, message=None, headers=None):
@@ -34,7 +34,6 @@ class FlaskBuzz(buzz.Buzz):
             'error': repr(self),
             'message': message,
         })
-        print(response.get_data())
         response.status_code = status_code
         response.headers = headers
         return response
