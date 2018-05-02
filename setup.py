@@ -21,7 +21,6 @@ setup(
     ],
     extras_require={
         'dev': [
-            'pytest-capturelog',
             'flake8',
             'pytest',
             'sphinx',
