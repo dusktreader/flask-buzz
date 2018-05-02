@@ -35,6 +35,17 @@ class TestFlaskBuzz:
             raise flask_buzz.FlaskBuzz('i failed')
         assert 'i failed (400)' in str(err_info.value)
 
+    def test_jsonify__does_not_strip_headers_if_no_headers_kwarg(self, app):
+        """
+        This test verifies that not passing custom kwargs does not override
+        the status code and headers returned by flask.jsonify.
+
+        Addresses new functionality introduced by Flask 1.0
+        """
+        response = flask_buzz.FlaskBuzz('shame').jsonify()
+        assert response.headers is not None
+        assert response.status_code is not None
+
     def test_basic_functionality(self, app):
         """
         This test verifies that the basic functionality of FlaskBuzz works

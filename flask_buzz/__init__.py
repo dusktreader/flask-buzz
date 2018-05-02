@@ -34,8 +34,10 @@ class FlaskBuzz(buzz.Buzz):
             'error': repr(self),
             'message': message,
         })
-        response.status_code = status_code
-        response.headers = headers
+        if status_code is not None:
+            response.status_code = status_code
+        if headers is not None:
+            response.headers = headers
         return response
 
 
