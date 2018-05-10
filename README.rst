@@ -2,9 +2,13 @@
    :target: https://badge.fury.io/py/flask-buzz
    :alt:    Latest Version
 
-.. image::  https://travis-ci.org/dusktreader/flask-buzz.svg?branch=integration
+.. image::  https://travis-ci.org/dusktreader/flask-buzz.svg?branch=master
    :target: https://travis-ci.org/dusktreader/flask-buzz
    :alt:    Build Status
+
+.. image::  https://readthedocs.org/projects/flask-buzz/badge/?version=latest
+   :target: http://flask-buzz.readthedocs.io/en/latest/?badge=latest
+   :alt:    Documentation Build Status
 
 ************
  flask-buzz

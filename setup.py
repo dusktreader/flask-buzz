@@ -23,6 +23,7 @@ setup(
         'dev': [
             'flake8',
             'pytest',
+            'pytest-flask',
             'sphinx',
         ],
     },
