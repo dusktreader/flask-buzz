@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v0.1.4 - 2018-05-09
+-------------------
+- Fixed badges on README
+- Fixed long description on pypi
+- Added support for python 3.4 - 3.7
+
 v0.1.4 - 2018-05-02
 -------------------
 - Fixed issue with flask1.0 and jsonify overriding headers
