@@ -4,30 +4,6 @@ import json
 import pytest
 
 
-class OverloadBuzz(flask_buzz.FlaskBuzz):
-    status_code = 401
-
-
-@pytest.fixture(scope='session')
-def app():
-    app = flask.app.Flask('TestFlaskBuzzApp')
-    app.testing = True
-    app.config.from_mapping(SERVER_NAME='test_server')
-
-    @app.route('/')
-    def index():
-        raise flask_buzz.FlaskBuzz('basic test')
-
-    @app.route('/status')
-    def status():
-        raise OverloadBuzz('status test')
-
-    app.register_error_handler(flask_buzz.FlaskBuzz, flask_buzz.error_handler)
-
-    with app.app_context():
-        yield app
-
-
 class TestFlaskBuzz:
 
     def test_raise(self):
