@@ -9,7 +9,7 @@ class OverloadBuzz(flask_buzz.FlaskBuzz):
 
 @pytest.fixture(scope='session')
 def app():
-    app = flask.Flask(__name__)
+    app = flask.Flask('normal_app')
     app.debug = False
     app.config['TESTING'] = True
     app.config['SERVER_NAME'] = 'test_server'
@@ -22,7 +22,13 @@ def app():
     def status():
         raise OverloadBuzz('status test')
 
-    app.register_error_handler(flask_buzz.FlaskBuzz, flask_buzz.error_handler)
+    app.register_error_handler(
+        flask_buzz.FlaskBuzz,
+        flask_buzz.build_error_handler(
+            lambda e: print('message: ', e.message),
+            lambda e: print('status_code: ', e.status_code),
+        ),
+    )
 
     with app.app_context():
         yield app

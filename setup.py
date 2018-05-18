@@ -29,6 +29,7 @@ setup(
     ],
     extras_require={
         'dev': [
+            'flask-restplus',
             'flake8',
             'pytest',
             'pytest-flask',
