@@ -74,7 +74,7 @@ class TestFlaskBuzz:
             def get(self):
                 raise FRPError('restplus test')
 
-        flask_buzz.register_error_handler_with_flask_restplus(
+        flask_buzz.FlaskBuzz.register_error_handler_with_flask_restplus(
             api,
             lambda e: print('message: ', e.message),
             lambda e: print('status_code: ', e.status_code),
