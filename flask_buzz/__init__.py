@@ -1,5 +1,7 @@
 import buzz
 import flask
+import functools
+import warnings
 
 
 class FlaskBuzz(buzz.Buzz):
@@ -43,10 +45,90 @@ class FlaskBuzz(buzz.Buzz):
 
 def error_handler(error):
     """
-    Supplies a generic function that may be bound to a flask error handler::
+    **Deprecated**: Use build_error_handler
+    """
+    warnings.warn(
+        "error_handler is deprecated. use build_error_handler instead",
+        DeprecationWarning,
+    )
+    return error.jsonify()
+
+
+def build_error_handler(*tasks):
+    """
+    Provides a generic error function that packages a flask_buzz exception so
+    that it can be handled nicely by the flask error handler::
 
         app.register_error_handler(
-            flask_buzz.FlaskBuzz, flask_buzz.error_handler,
+            flask_buzz.FlaskBuzz, flask_buzz.build_error_handler(),
+        )
+
+    Additionally, extra tasks may be applied to the error prior to packaging::
+        app.register_error_handler(
+            flask_buzz.FlaskBuzz,
+            flask_buzz.build_error_handler(print, lambda e: foo(e)),
+        )
+
+    This latter example will print the error to stdout and also call the foo()
+    function with the error prior to packaing it for flask's handler
+    """
+
+    def _handler(error, tasks=[]):
+        [t(error) for t in tasks]
+        return error.jsonify(), error.status_code, error.headers
+
+    return functools.partial(_handler, tasks=tasks)
+
+
+def build_error_handler_for_flask_restplus(*tasks):
+    """
+    Provides a generic error function that packages a flask_buzz exception so
+    that it can be handled by the flask-restplus error handler::
+
+        @api.errorhandler(SomeFlaskBuzzDerivedError)
+        def do_it(error):
+            return ()
+
+    or::
+
+        api.errorhandler(SFBDError)(build_error_handler_for_flask_restplus())
+
+    Flask-restplus handles exceptions differently than Flask, and it is
+    awkward. For further reading on why special functionality is needed for
+    flask-restplus, observe and compare:
+
+        * http://flask.pocoo.org/docs/0.12/patterns/apierrors/
+        * http://flask-restplus.readthedocs.io/en/stable/errors.html#
+
+    Additionally, extra tasks may be applied to the error prior to packaging as
+    in ``build_error_handler``
+    """
+    def _handler(error, tasks=[]):
+        [t(error) for t in tasks]
+        response = error.jsonify()
+        return flask.json.loads(response.get_data), response.status_code
+
+    return functools.partial(_handler, tasks=tasks)
+
+
+def register_error_handler_with_flask_restplus(api, *tasks):
+    """
+    Registers an error handler for FlaskBuzz derived errors that are
+    currently imported. This is useful since flask-restplus (prior to 0.11.0)
+    does not handle derived errors. This is probably the easist way to register
+    error handlers for FlaskBuzz errors with flask-restplus::
+
+        register_error_handler_with_flask_restplus(
+            api, print, lambda e: foo(e),
         )
     """
-    return error.jsonify()
+
+    def _handler(error, tasks=[]):
+        [t(error) for t in tasks]
+        response = error.jsonify()
+        return flask.json.loads(response.get_data), response.status_code
+
+    for buzz_subclass in FlaskBuzz.__subclasses__():
+        api.errorhandler(buzz_subclass)(
+            build_error_handler_for_flask_restplus(*tasks)
+        )
