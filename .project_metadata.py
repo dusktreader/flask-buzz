@@ -5,7 +5,7 @@
     'description': 'Extra bindings on py-buzz specifically for flask apps',
     'license': 'MIT',
     'name': 'flask-buzz',
-    'release': '0.1.6',
+    'release': '0.1.7',
     'url': 'https://github.com/dusktreader/flask-buzz',
     'version': '0.1',
 }

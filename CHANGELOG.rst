@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v0.1.7 - 2018-05-18
+-------------------
+- A release number got lost in here somehow
+- Made error handler helpers class methods of FlaskBuzz
+
 v0.1.5 - 2018-05-18
 -------------------
 - Added helper methods for flask-restplus
