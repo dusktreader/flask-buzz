@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v0.1.5 - 2018-05-18
+-------------------
+- Added helper methods for flask-restplus
+- Deprecated error_handler
+- Added build_error_handler
+
 v0.1.4 - 2018-05-09
 -------------------
 - Fixed badges on README
