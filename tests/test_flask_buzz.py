@@ -43,9 +43,9 @@ class TestFlaskBuzz:
         response_json = json.loads(response.get_data(as_text=True))
         assert response_json['message'] == 'basic test'
 
-        captured = capsys.readouterr()
-        assert stripped('message: basic test') in stripped(captured.out)
-        assert stripped('status_code: 400') in stripped(captured.out)
+        (out, err) = capsys.readouterr()
+        assert stripped('message: basic test') in stripped(out)
+        assert stripped('status_code: 400') in stripped(out)
 
     def test_overloaded_status_code(self, app):
         """
@@ -85,6 +85,6 @@ class TestFlaskBuzz:
         assert response.status_code == 403
         assert response.json['message'] == 'restplus test'
 
-        captured = capsys.readouterr()
-        assert stripped('message: restplus test') in stripped(captured.out)
-        assert stripped('status_code: 403') in stripped(captured.out)
+        (out, err) = capsys.readouterr()
+        assert stripped('message: restplus test') in stripped(out)
+        assert stripped('status_code: 403') in stripped(out)
