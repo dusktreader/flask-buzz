@@ -99,7 +99,7 @@ class FlaskBuzz(buzz.Buzz):
         def _handler(error, tasks=[]):
             [t(error) for t in tasks]
             response = error.jsonify()
-            return flask.json.loads(response.get_data), response.status_code
+            return flask.json.loads(response.get_data()), response.status_code
 
         return functools.partial(_handler, tasks=tasks)
 
@@ -117,12 +117,7 @@ class FlaskBuzz(buzz.Buzz):
             )
         """
 
-        def _handler(error, tasks=[]):
-            [t(error) for t in tasks]
-            response = error.jsonify()
-            return flask.json.loads(response.get_data), response.status_code
-
-        for buzz_subclass in cls.__subclasses__():
+        for buzz_subclass in [cls] + cls.__subclasses__():
             api.errorhandler(buzz_subclass)(
                 cls.build_error_handler_for_flask_restplus(*tasks)
             )

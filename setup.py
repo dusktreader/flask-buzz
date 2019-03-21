@@ -31,7 +31,7 @@ setup(
         'dev': [
             'flask-restplus',
             'flake8',
-            'pytest',
+            'pytest>=3.6',
             'pytest-flask',
             'sphinx',
         ],
