@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v0.1.8 - 2019-03-21
+-------------------
+- Patched error handling for flask-restplus
+- Added example for flask-restplus
+
 v0.1.7 - 2018-05-18
 -------------------
 - A release number got lost in here somehow
