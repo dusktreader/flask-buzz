@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v0.1.9 - 2019-04-12
+-------------------
+- Added a new 'features' page to documentation
+- Added several new examples
+- Converted project to use poetry
+- Dropped support for python 3.4
+
 v0.1.8 - 2019-03-21
 -------------------
 - Patched error handling for flask-restplus
