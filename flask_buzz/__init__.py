@@ -1,6 +1,7 @@
 import buzz
 import flask
 import functools
+import http
 import warnings
 
 
@@ -8,7 +9,7 @@ class FlaskBuzz(buzz.Buzz):
 
     # These are the values that should be used by default when this
     # exception is handled by a flask error handler
-    status_code = 400
+    status_code = http.HTTPStatus.BAD_REQUEST
     headers = None
 
     def __str__(self):

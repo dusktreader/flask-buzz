@@ -17,4 +17,4 @@ Table of Contents
    :caption: Contents:
 
    Quickstart <quickstart>
-   API <sview>
+   Features <features>

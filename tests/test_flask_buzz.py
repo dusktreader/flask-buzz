@@ -18,7 +18,7 @@ class TestFlaskBuzz:
     def test_raise(self):
         with pytest.raises(flask_buzz.FlaskBuzz) as err_info:
             raise flask_buzz.FlaskBuzz('i failed')
-        assert 'i failed (400)' in str(err_info.value)
+        assert 'i failed' in str(err_info.value)
 
     def test_jsonify__does_not_strip_headers_if_no_headers_kwarg(self, app):
         """
@@ -45,7 +45,6 @@ class TestFlaskBuzz:
 
         (out, err) = capsys.readouterr()
         assert stripped('message: basic test') in stripped(out)
-        assert stripped('status_code: 400') in stripped(out)
 
     def test_overloaded_status_code(self, app):
         """
@@ -87,4 +86,3 @@ class TestFlaskBuzz:
 
         (out, err) = capsys.readouterr()
         assert stripped('message: restplus test') in stripped(out)
-        assert stripped('status_code: 403') in stripped(out)

@@ -1,23 +1,27 @@
 language: python
 python:
-- '3.4'
 - '3.5'
 - '3.6'
-- '3.7-dev'
+- '3.7'
+dist: xenial
+before_install:
+- pip install poetry
 install:
-- pip install --upgrade pip
-- pip install .[dev]
-before_script:
-- flake8 flask_buzz
-- flake8 tests
-script: pytest tests
+- poetry install
+script:
+- poetry run flake8 flask_buzz
+- poetry run flake8 tests
+- poetry run pytest tests
+before_deploy:
+- poetry config http-basic.pypi dusktreader $PYPI_PASSWORD
+- poetry build
 deploy:
-  provider: pypi
-  user: dusktreader
-  password:
-    secure: F+xNVXMRdNLFtHn0vIvu+nC6sqjwCXELiJCZk69syHzo1kmSRCpgMSnl3HE7nzfBrfaFnHqyRRdnAilAb9mIPVAAL/x0yO2JeZk3UTgBT7ncW2FeP9TVJer9lMHCQfzN/bbL+cOINF40B7R6yA+mdFL8RRgn3TrC+tIYzaPqjD9CtPiAWKo5zsU8swLqaaEy/MPn59cEBw7R6guHcHDx6coTe063lpLfV3ILyxGXdFp8dXDgJyFLBWKjG2H6KnvGUlInLIpD/MroUscGB/Zr8KJl10BcJQlj73BLjgQGfUcXYYEpj2O+rnMs3oteTAvKwrsF3Mo6+fKlmYPC3QpGa6hIRwFsGl1Itkh/58hdstiAc6WbBzGFVy+N54ruvaZwtY9fSeOxpquboizP7grlDfEnRr1bh2xYFN3rPIu0uCAghWsC+U0ZA5JuBz0a+P05yddt5bsWe0AnCtX+WmL3hww/1go5Fr05cV4Z0lLZqfv7z4CnMjk+JjI5lqdM1nxTKZZDXg9pTVdjYr51EL0sPjbGMFjU6tF7ttnJ2fcP718scD9Dy0b/F45QUFLu/AK28c75OIcd8/jgIDVBZGfNHEuS3LDtQ1LdfpfcS7sWGhNT5ao5WqQgDv6wwx8/5IZJUTh5jEgIztffCagdp7K3sNZrNcm3yud/GcyLv3VyCRI=
+  provider: script
+  script: poetry publish
+  skip_cleanup: true
   on:
     tags: true
-    distributions: sdist bdist_wheel
-    repo: dusktreader/flask-buzz
     python: 3.6
+env:
+  global:
+    secure: F+xNVXMRdNLFtHn0vIvu+nC6sqjwCXELiJCZk69syHzo1kmSRCpgMSnl3HE7nzfBrfaFnHqyRRdnAilAb9mIPVAAL/x0yO2JeZk3UTgBT7ncW2FeP9TVJer9lMHCQfzN/bbL+cOINF40B7R6yA+mdFL8RRgn3TrC+tIYzaPqjD9CtPiAWKo5zsU8swLqaaEy/MPn59cEBw7R6guHcHDx6coTe063lpLfV3ILyxGXdFp8dXDgJyFLBWKjG2H6KnvGUlInLIpD/MroUscGB/Zr8KJl10BcJQlj73BLjgQGfUcXYYEpj2O+rnMs3oteTAvKwrsF3Mo6+fKlmYPC3QpGa6hIRwFsGl1Itkh/58hdstiAc6WbBzGFVy+N54ruvaZwtY9fSeOxpquboizP7grlDfEnRr1bh2xYFN3rPIu0uCAghWsC+U0ZA5JuBz0a+P05yddt5bsWe0AnCtX+WmL3hww/1go5Fr05cV4Z0lLZqfv7z4CnMjk+JjI5lqdM1nxTKZZDXg9pTVdjYr51EL0sPjbGMFjU6tF7ttnJ2fcP718scD9Dy0b/F45QUFLu/AK28c75OIcd8/jgIDVBZGfNHEuS3LDtQ1LdfpfcS7sWGhNT5ao5WqQgDv6wwx8/5IZJUTh5jEgIztffCagdp7K3sNZrNcm3yud/GcyLv3VyCRI=

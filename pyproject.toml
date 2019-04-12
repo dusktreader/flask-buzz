@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "flask-buzz"
+version = "0.1.8"
+description = "'Extra bindings on py-buzz specifically for flask apps'"
+authors = ["Tucker Beck <tucker.beck@gmail.com>"]
+license = "MIT"
+copyright = '2017, Tucker Beck'
+
+[tool.poetry.dependencies]
+python = "^3.5"
+py-buzz = "^0.3.6"
+flask = "^1.0"
+
+[tool.poetry.dev-dependencies]
+flask-restplus = "^0.12.1"
+flake8 = "^3.7"
+pytest = "^3.6"
+pytest-flask = "^0.14.0"
+toml = "^0.10.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
