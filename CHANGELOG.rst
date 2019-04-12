@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v0.1.12 - 2019-04-12
+-------------------
+- Ugh....actually add them this time
+
 v0.1.11 - 2019-04-12
 -------------------
 - Added readthedocs config (to make build work...I hope)
