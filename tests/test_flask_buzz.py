@@ -1,7 +1,6 @@
 import flask
 import flask_buzz
 import flask_restplus
-import http
 import json
 import pytest
 import re
