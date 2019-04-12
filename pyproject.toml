@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flask-buzz"
-version = "0.1.9"
+version = "0.1.11"
 description = "'Extra bindings on py-buzz specifically for flask apps'"
 authors = ["Tucker Beck <tucker.beck@gmail.com>"]
 license = "MIT"
