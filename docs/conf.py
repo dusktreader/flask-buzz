@@ -9,6 +9,7 @@ import sys
 project_root = os.path.dirname(os.path.dirname(__file__))
 toml_data = toml.load(os.path.join(project_root, 'pyproject.toml'))
 project_metadata = toml_data['tool']['poetry']
+project_metadata['author'] = project_metadata['authors'][0]
 
 packages = setuptools.find_packages(where=project_root, exclude=['test*'])
 unique_roots = set([p.split('.')[0] for p in packages])
@@ -39,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-author = project_metadata['authors']
+author = project_metadata['author']
 project = project_metadata['name']
 copyright = project_metadata['copyright']
 
@@ -121,7 +122,7 @@ latex_documents = [
         master_doc,
         project_metadata['name'] + '.tex',
         project_metadata['name'] + ' Documentation',
-        project_metadata['authors'],
+        author,
         'manual',
     ),
 ]
@@ -136,7 +137,7 @@ man_pages = [
         master_doc,
         project_metadata['name'],
         project_metadata['name'] + ' Documentaion',
-        [project_metadata['authors']],
+        author,
         1,
     )
 ]
@@ -152,7 +153,7 @@ texinfo_documents = [
         master_doc,
         project_metadata['name'],
         project_metadata['name'] + ' Documentation',
-        project_metadata['authors'],
+        author,
         project_metadata['name'],
         'One line description of project.',
         'Miscellaneous',
