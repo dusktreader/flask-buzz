@@ -1,14 +1,13 @@
 [tool.poetry]
 name = "flask-buzz"
-version = "0.1.14"
+version = "0.1.15"
 description = "'Extra bindings on py-buzz specifically for flask apps'"
 authors = ["Tucker Beck <tucker.beck@gmail.com>"]
 license = "MIT"
-copyright = '2017, Tucker Beck'
 
 [tool.poetry.dependencies]
 python = "^3.5"
-py-buzz = "^0.3.6"
+py-buzz = "^1.0.0"
 flask = "^1.0"
 
 [tool.poetry.dev-dependencies]
