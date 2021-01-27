@@ -1,8 +1,9 @@
-import buzz
-import flask
 import functools
 import http
 import warnings
+
+import buzz
+import flask
 
 
 class FlaskBuzz(buzz.Buzz):
@@ -32,11 +33,13 @@ class FlaskBuzz(buzz.Buzz):
             message = self.message
         if headers is None:
             headers = self.headers
-        response = flask.jsonify({
-            'status_code': status_code,
-            'error': repr(self),
-            'message': message,
-        })
+        response = flask.jsonify(
+            {
+                "status_code": status_code,
+                "error": repr(self),
+                "message": message,
+            }
+        )
         if status_code is not None:
             response.status_code = status_code
         if headers is not None:
@@ -97,6 +100,7 @@ class FlaskBuzz(buzz.Buzz):
         Additionally, extra tasks may be applied to the error prior to
         packaging as in ``build_error_handler``
         """
+
         def _handler(error, tasks=[]):
             [t(error) for t in tasks]
             response = error.jsonify()
@@ -119,9 +123,7 @@ class FlaskBuzz(buzz.Buzz):
         """
 
         for buzz_subclass in [cls] + cls.__subclasses__():
-            api.errorhandler(buzz_subclass)(
-                cls.build_error_handler_for_flask_restplus(*tasks)
-            )
+            api.errorhandler(buzz_subclass)(cls.build_error_handler_for_flask_restplus(*tasks))
 
 
 def error_handler(error):

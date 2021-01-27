@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v1.0.0 - 2021-01-26
+-------------------
+- Updated dependency to py-buzz 2.0
+- Dropped support for python 3.5
+- Added black and isort pre-commit hooks
+- Pinned werkzeug dependency to 0.16.1
+
 v0.1.14 - 2019-04-12
 -------------------
 - Fixed documentation building on readthedocs
