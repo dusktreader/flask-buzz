@@ -61,38 +61,38 @@ jsonified error with status code automatically:
    def index():
        raise flask_buzz.FlaskBuzz('Nope!')
 
-Install error handler for flask-restplus
+Install error handler for flask-restx
 ----------------------------------------
 
-The flask-restplus extension does exception handling a little bit differently.
+The flask-restx extension does exception handling a little bit differently.
 It does not tie into the vanilla flask exception handling. Thus, you have to
 do some extra things. The flask-buzz package adds some support help to register
-error handlers for FlaskBuzz derived exceptions with flask-restplus:
+error handlers for FlaskBuzz derived exceptions with flask-restx:
 
 .. code-block:: python
 
-   api = flask_restplus.Api(app)
-   flask_buzz.FlaskBuzz.register_error_handler_with_flask_restplus(api)
+   api = flask_restx.Api(app)
+   flask_buzz.FlaskBuzz.register_error_handler_with_flask_restx(api)
 
    @api.route('/index')
-   class MyResource(flask_restplus.Resource):
+   class MyResource(flask_restx.Resource):
 
        def get(self):
            raise flask_buzz.FlaskBuzz("I died")
 
 In this example, the error handler is registered for all FlaskBuzz exceptions.
 If you want to make your app only handle some custom class that's based on
-FlaskBuzz, you would call the register_error_handler_with_flask_restplus()
+FlaskBuzz, you would call the register_error_handler_with_flask_restx()
 method from the derived class:
 
 .. code-block:: python
 
-   DerivedBuzzError.register_error_handler_with_flask_restplus(api)
+   DerivedBuzzError.register_error_handler_with_flask_restx(api)
 
 Adding tasks to error handlers
 ------------------------------
 
-Both the regular and flask-restplus error handlers support adding additional
+Both the regular and flask-restx error handlers support adding additional
 tasks to be executed when a FlaskBuzz exception is handled. For example, you
 might wish to log the exceptions before returning the response.
 
@@ -109,11 +109,11 @@ instance itself. These callables are passed as additional positional arguments:
        flask_buzz.FlaskBuzz.build_error_handler(log_error),
    )
 
-for flask-restplus:
+for flask-restx:
 
 .. code-block:: python
 
-   flask_buzz.FlaskBuzz.register_error_handler_with_flask_restplus(
+   flask_buzz.FlaskBuzz.register_error_handler_with_flask_restx(
        api,
        log_error,
    )

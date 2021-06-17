@@ -2,7 +2,7 @@ import json
 import re
 
 import flask
-import flask_restplus
+import flask_restx
 import pytest
 
 import flask_buzz
@@ -59,31 +59,31 @@ class TestFlaskBuzz:
             response_json = json.loads(response.get_data(as_text=True))
             assert response_json["message"] == "status test"
 
-    def test_flask_restplus_error_registration(self, app, capsys):
+    def test_flask_restx_error_registration(self, app, capsys):
         """
         This test verifies that registration of FlaskBuzz error handlers in
-        Flask-Restplus works correctly
+        Flask-Restx works correctly
         """
-        api = flask_restplus.Api(app)
+        api = flask_restx.Api(app)
 
         class FRPError(flask_buzz.FlaskBuzz):
             status_code = 403
 
-        @api.route("/restplus", endpoint="restplus")
-        class RestplusResource(flask_restplus.Resource):
+        @api.route("/restx", endpoint="restx")
+        class RestxResource(flask_restx.Resource):
             def get(self):
-                raise FRPError("restplus test")
+                raise FRPError("restx test")
 
-        flask_buzz.FlaskBuzz.register_error_handler_with_flask_restplus(
+        flask_buzz.FlaskBuzz.register_error_handler_with_flask_restx(
             api,
             lambda e: print("message: ", e.message),
             lambda e: print("status_code: ", e.status_code),
         )
 
         client = app.test_client()
-        response = client.get(flask.url_for("restplus"))
+        response = client.get(flask.url_for("restx"))
         assert response.status_code == 403
-        assert response.json["message"] == "restplus test"
+        assert response.json["message"] == "restx test"
 
         (out, err) = capsys.readouterr()
-        assert stripped("message: restplus test") in stripped(out)
+        assert stripped("message: restx test") in stripped(out)
