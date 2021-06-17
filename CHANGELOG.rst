@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v2.0.0 - 2021-06-17
+-------------------
+- Removed support for flask-restplus and moved to flask-restx
+
 v1.0.0 - 2021-01-26
 -------------------
 - Updated dependency to py-buzz 2.0
