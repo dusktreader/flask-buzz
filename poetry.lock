@@ -66,7 +66,7 @@ d = ["aiohttp (>=3.3.2)", "aiohttp-cors"]
 name = "click"
 version = "8.0.1"
 description = "Composable command line interface toolkit"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -78,7 +78,7 @@ importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 name = "colorama"
 version = "0.4.4"
 description = "Cross-platform colored terminal text."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -86,7 +86,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "dataclasses"
 version = "0.8"
 description = "A backport of the dataclasses module for Python 3.6"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6, <3.7"
 
@@ -122,7 +122,7 @@ pyflakes = ">=2.3.0,<2.4.0"
 name = "flask"
 version = "2.0.1"
 description = "A simple framework for building complex web applications."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -161,7 +161,7 @@ test = ["blinker", "Faker (==2.0.0)", "mock (==3.0.5)", "pytest-benchmark (==3.2
 name = "importlib-metadata"
 version = "4.6.1"
 description = "Read metadata from Python packages"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -207,7 +207,7 @@ colors = ["colorama (>=0.4.3,<0.5.0)"]
 name = "itsdangerous"
 version = "2.0.1"
 description = "Safely pass data to untrusted environments and back."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -215,7 +215,7 @@ python-versions = ">=3.6"
 name = "jinja2"
 version = "3.0.1"
 description = "A very fast and expressive template engine."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -247,7 +247,7 @@ format_nongpl = ["idna", "jsonpointer (>1.13)", "webcolors", "rfc3986-validator 
 name = "markupsafe"
 version = "2.0.1"
 description = "Safely add untrusted strings to HTML/XML markup."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -434,7 +434,7 @@ python-versions = "*"
 name = "typing-extensions"
 version = "3.10.0.0"
 description = "Backported and Experimental Type Hints for Python 3.5+"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -442,7 +442,7 @@ python-versions = "*"
 name = "werkzeug"
 version = "2.0.1"
 description = "The comprehensive WSGI web application library."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -464,7 +464,7 @@ python-versions = "*"
 name = "zipp"
 version = "3.5.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -475,7 +475,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "79b997361b34b373fb0fb829cef0f8921693a8fab40036ad044329423d56dc63"
+content-hash = "5638e35b156b5fccf80b5f36da9926bf484074fa689783a603bac33cd7f51a74"
 
 [metadata.files]
 aniso8601 = [
