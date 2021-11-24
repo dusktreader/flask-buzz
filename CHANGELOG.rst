@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v2.0.1 - 2021-11-23
+-------------------
+- Added flask 2.0 support
+- Removed explicit werkzeug dependency
+
 v2.0.0 - 2021-06-17
 -------------------
 - Removed support for flask-restplus and moved to flask-restx
