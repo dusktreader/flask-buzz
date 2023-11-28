@@ -1,31 +1,27 @@
 [tool.poetry]
 name = "flask-buzz"
-version = "2.0.1"
+version = "3.0.0"
 description = "'Extra bindings on py-buzz specifically for flask apps'"
 authors = ["Tucker Beck <tucker.beck@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.6"
-py-buzz = "^2.0.0"
+python = "^3.8"
+py-buzz = ">=3.0, <5.0"
 flask = ">=1.0, <3.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 flask-restx = ">=0.4.0"
 flake8 = "^3.7"
 pytest = "^6.0"
 pytest-flask = "^1.1.0"
 toml = "^0.10.0"
-black = "^20.8b1"
-isort = "^5.7.0"
+ruff = "^0.1.6"
+nox = "^2023.4.22"
 
-[tool.black]
+[tool.ruff]
 line-length = 120
-
-[tool.isort]
-src_paths = ["flask_buzz", "tests"]
-multi_line_output = 3
-include_trailing_comma = true
+src = ["flask_buzz", "tests"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
