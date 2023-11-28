@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v3.0.0 - 2023-11-28
+-------------------
+- Dropped support for python 3.6 and 3.7
+- Updated py-buzz depency to 3.0 or greater.
+
 v2.0.1 - 2021-11-23
 -------------------
 - Added flask 2.0 support

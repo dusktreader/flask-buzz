@@ -8,7 +8,7 @@ class OverloadBuzz(flask_buzz.FlaskBuzz):
     status_code = 401
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def app():
     app = flask.Flask("normal_app")
     app.debug = False
