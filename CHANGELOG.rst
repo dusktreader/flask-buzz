@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+v3.1.0 - 2024-03-08
+-------------------
+- Updated to allow Flask 3.0
+
 v3.0.0 - 2023-11-28
 -------------------
 - Dropped support for python 3.6 and 3.7
