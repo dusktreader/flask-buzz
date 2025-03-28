@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>http://dusktreader.github.io/flask-buzz/</loc>
+         <lastmod>2025-03-28</lastmod>
+    </url>
+    <url>
+         <loc>http://dusktreader.github.io/flask-buzz/features/</loc>
+         <lastmod>2025-03-28</lastmod>
+    </url>
+    <url>
+         <loc>http://dusktreader.github.io/flask-buzz/quickstart/</loc>
+         <lastmod>2025-03-28</lastmod>
+    </url>
+    <url>
+         <loc>http://dusktreader.github.io/flask-buzz/reference/</loc>
+         <lastmod>2025-03-28</lastmod>
+    </url>
+</urlset>
