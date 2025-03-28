@@ -30,4 +30,4 @@ Minimal usage example: [examples/basic.py](https://github.com/dusktreader/flask-
 ## Documentation
 
 The complete documentation can be found at the
-[flask-buzz home page](https://github.dusktreader.io/flask-buzz)
+[flask-buzz home page](https://dusktreader.github.io/flask-buzz)
