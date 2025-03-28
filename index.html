@@ -438,10 +438,10 @@
 <p><em>py-buzz bindings specifically for Flask applications</em></p>
 <h2 id="overview">Overview</h2>
 <p>This package extends the functionality from the <code>py-buzz</code> package to add some sugar for Flask apps.  <code>FlaskBuzz</code>
-exception messages can be automatically jsonified with the supplied basic error handler. This means that client code can
-simply register an error handler with their Flask app to supply fully prepared api responses for specific exception
-types.</p>
-<p>This means to return nicely formatted error responses when custom exceptions are raised is as simple as:</p>
+provides an exception handler builder to create nice error responses with the right status code and information included
+in the response body. This means that client code can simply register an error handler with their Flask app to supply
+fully prepared api responses for specific exception types.</p>
+<p>Setting up you Flask app to return nicely formatted error responses when custom exceptions are raised is as simple as:</p>
 <ul>
 <li>Deriving a custom exception class from <code>FlaskBuzz</code></li>
 <li>Registering the error handler with your Flask app</li>
