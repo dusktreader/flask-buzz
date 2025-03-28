@@ -1,0 +1,66 @@
+# Configuration for mkdocs
+
+site_name: flask-buzz documentation
+site_url: http://dusktreader.github.io/flask-buzz
+repo_url: https://github.com/dusktreader/flask-buzz
+docs_dir: source
+theme:
+  name: material
+  features:
+    - navigation.expand
+    - content.code.copy
+  font:
+    code: Fira Code
+  features:
+    - navigation.expand
+    - navigation.footer
+    - navigation.tracking
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+watch:
+  - ../src/flask_buzz
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Features: features.md
+  - Reference: reference.md
+watch:
+  - ../src/flask_buzz
+plugins:
+  search:
+    lang: en
+  mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        paths: [..]
+        options:
+          heading_level: 3
+          show_root_heading: true
+          separate_signature: true
+          show_signature_annotations: true
+          show_source: false
+          docstring_style: google
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite:
+  - pymdownx.snippets:
+  - pymdownx.superfences:
+  - pymdownx.details:
+  - admonition:
+  - attr_list:

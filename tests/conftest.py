@@ -1,11 +1,18 @@
+import inspect
 import flask
 import pytest
 
-import flask_buzz
+from flask_buzz import FlaskBuzz
 
 
-class OverloadBuzz(flask_buzz.FlaskBuzz):
-    status_code = 401
+class OverloadBuzz(FlaskBuzz):
+    status_code: int = 401
+
+
+def func_name() -> str:
+    frame = inspect.currentframe()
+    assert frame is not None
+    return frame.f_code.co_name
 
 
 @pytest.fixture
@@ -16,20 +23,21 @@ def app():
     app.config["SERVER_NAME"] = "test_server"
 
     @app.route("/")
-    def index():
-        raise flask_buzz.FlaskBuzz("basic test")
+    def index():  # pyright: ignore[reportUnusedFunction]
+        raise FlaskBuzz("basic test")
 
     @app.route("/status")
-    def status():
+    def status():  # pyright: ignore[reportUnusedFunction]
         raise OverloadBuzz("status test")
 
-    app.register_error_handler(
-        flask_buzz.FlaskBuzz,
-        flask_buzz.FlaskBuzz.build_error_handler(
-            lambda e: print("message: ", e.message),
-            lambda e: print("status_code: ", e.status_code),
-        ),
-    )
+    @app.route("/dangerous")
+    def dangerous():  # pyright: ignore[reportUnusedFunction]
+        with FlaskBuzz.handle_errors("base message"):
+            raise RuntimeError("dangerous test")
+
+    @app.route("/unhandled")
+    def unhandled():  # pyright: ignore[reportUnusedFunction]
+        raise RuntimeError("unhandled test")
 
     with app.app_context():
         yield app
