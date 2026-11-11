@@ -1,14 +1,14 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from functools import partial
 from http import HTTPStatus
-from typing import Any, Callable, TypeAlias, cast
-from typing_extensions import Self, override
+from typing import Any, Self, TypeAlias, cast
 
 import flask
-from flask.typing import ResponseReturnValue, HeadersValue
 from buzz import Buzz
-
+from flask.typing import HeadersValue, ResponseReturnValue
+from typing_extensions import override
 
 FlaskBuzzTask: TypeAlias = Callable[["FlaskBuzz"], None]
 """A function that takes a FlaskBuzz exception and performs a task on it"""
@@ -32,10 +32,7 @@ class FlaskBuzz(Buzz):
 
     @override
     def __str__(self):
-        return "{super_str} ({status_code})".format(
-            super_str=super().__str__(),
-            status_code=self.status_code,
-        )
+        return f"{super().__str__()} ({self.status_code})"
 
     def jsonify(
         self,
@@ -66,7 +63,7 @@ class FlaskBuzz(Buzz):
                          serializable.
         """
         if status_code is None:
-           status_code = self.status_code
+            status_code = self.status_code
         if message is None:
             if not self.debug and self.base_message is not None:
                 message = self.base_message

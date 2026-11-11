@@ -1,49 +1,127 @@
-.ONESHELL:
-.DEFAULT_GOAL:=help
-SHELL:=/bin/bash
-PACKAGE_TARGET:=src/flask_buzz
+default: help
 
-.PHONY: test
-test:
-	uv run pytest
 
-.PHONY: types
-types:
-	uv run mypy ${PACKAGE_TARGET} tests examples --pretty
-	uv run basedpyright ${PACKAGE_TARGET} tests examples
+## ==== Quality Control ================================================================================================
 
-.PHONY: lint
-lint:
-	uv run ruff check ${PACKAGE_TARGET} tests examples
+qa: qa/full  ## Shortcut for qa/full
 
-.PHONY: qa
-qa: test lint types
-	echo "All quality checks pass!"
+qa/test:  ## Run all tests
+	@uv run pytest
 
-.PHONY: format
-format:
-	uv run ruff format ${PACKAGE_TARGET} tests examples
+qa/types:  ## Run static type checks
+	@uv run ty check ${PACKAGE_TARGET} tests
 
-.PHONY: docs
-docs:
-	uv run mkdocs build --config-file=docs/mkdocs.yaml
+qa/lint:  ## Run linters
+	@uv run ruff check ${PACKAGE_TARGET} tests
+	@uv run typos ${PACKAGE_TARGET} tests docs/source
 
-.PHONY: docs-serve
-docs-serve:
-	uv run mkdocs serve --config-file=docs/mkdocs.yaml --dev-addr=localhost:10000
+qa/full: qa/test qa/lint qa/types  ## Run the full set of quality checks
+	@echo "All quality checks pass!"
 
-.PHONY: clean
+qa/format:  ## Run code formatter
+	@uv run ruff check --select I --fix ${PACKAGE_TARGET} tests
+	@uv run ruff format ${PACKAGE_TARGET} tests
+
+
+## ==== Documentation ==================================================================================================
+
+docs: docs/serve  ## Shortcut for docs/serve
+
+docs/build:  ## Build the documentation
+	@uv run zensical build --config-file=docs/zensical.toml
+
+docs/serve:  ## Build the docs and start a local dev server
+	@uv run zensical serve --config-file=docs/zensical.toml
+
+
+## ==== Other Commands =================================================================================================
+
+publish: _confirm  ## Publish the package by pushing a tag with the current version
+	@if [[ "$$(git rev-parse --abbrev-ref HEAD)" != "main" ]]; then \
+		echo "You must be on the main branch to publish." && exit 1; \
+	fi
+	@git tag v$$(uv version --short) && git push origin v$$(uv version --short)
+
+
+## ==== Helpers ========================================================================================================
+
+hooks:  ## Install/update pre-commit hooks
+	@uv run pre-commit install --hook-type=pre-commit --hook-type=pre-push
+
 clean:  ## Clean up build artifacts and other junk
 	@rm -rf .venv
 	@uv run pyclean . --debris
 	@rm -rf dist
 	@rm -rf .ruff_cache
 	@rm -rf .pytest_cache
-	@rm -rf .mypy_cache
 	@rm -f .coverage*
 	@rm -f .junit.xml
 
-# Recipe stolen from: https://gist.github.com/prwhite/8168133?permalink_comment_id=4160123#gistcomment-4160123
-.PHONY: help
 help:  ## Show help message
-	@awk 'BEGIN {FS = ": .*##"; printf "\nUsage:\n  make \033[36m\033[0m\n"} /^[$$()% 0-9a-zA-Z_-]+(\\:[$$()% 0-9a-zA-Z_-]+)*:.*?##/ { gsub(/\\:/,":", $$1); printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+	@awk "$$PRINT_HELP_PREAMBLE" $(MAKEFILE_LIST)
+
+
+# ..... Environment ....................................................................................................
+
+PACKAGE_TARGET:=src/flask_buzz
+
+
+# ..... Make configuration .............................................................................................
+
+.ONESHELL:
+SHELL:=/bin/bash
+.PHONY: qa qa/test qa/test qa/types qa/lint qa/full qa/format \
+	docs docs/build docs/serve \
+	publish \
+	hooks clean help
+
+
+# ..... Color table for pretty printing ................................................................................
+
+RED    := \033[31m
+GREEN  := \033[32m
+YELLOW := \033[33m
+BLUE   := \033[34m
+TEAL   := \033[36m
+GRAY   := \033[90m
+CLEAR  := \033[0m
+ITALIC := \033[3m
+
+
+# ..... Hidden auxiliary targets .......................................................................................
+
+_confirm:  # Requires confirmation before proceeding (Do not use directly)
+	@if [[ -z "$(CONFIRM)" ]]; then \
+		echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]; \
+	fi
+
+
+# ..... Help printer ...................................................................................................
+
+define PRINT_HELP_PREAMBLE
+BEGIN {
+	print "Usage: $(YELLOW)make <target>$(CLEAR)"
+	print
+	print "Targets:"
+}
+/^## =+ .+( =+)?/ {
+    s = $$0
+    sub(/^## =+ /, "", s)
+    sub(/ =+/, "", s)
+	printf("\n  %s:\n", s)
+}
+/^## -+ .+( -+)?/ {
+    s = $$0
+    sub(/^## -+ /, "", s)
+    sub(/ -+/, "", s)
+	printf("\n    $(TEAL)> %s$(CLEAR)\n", s)
+}
+/^[$$()% 0-9a-zA-Z_\/-]+(\\:[$$()% 0-9a-zA-Z_\/-]+)*:.*?##/ {
+    t = $$0
+    sub(/:.*/, "", t)
+    h = $$0
+    sub(/.?*##/, "", h)
+    printf("    $(YELLOW)%-19s$(CLEAR) $(GRAY)$(ITALIC)%s$(CLEAR)\n", t, h)
+}
+endef
+export PRINT_HELP_PREAMBLE
