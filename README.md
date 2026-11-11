@@ -16,7 +16,7 @@ control over what is included in the error body.
 
 ## Super-quick Start
 
-Requires: Python 3.10 to 3.13
+Requires: Python 3.11 or later
 
 Install through pip:
 

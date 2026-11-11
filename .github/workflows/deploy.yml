@@ -1,4 +1,5 @@
-name: deploy-on-tag
+name: Deploy on tag
+run-name: deploy-on-tag
 
 on:
   push:
@@ -9,19 +10,22 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v3
+      uses: astral-sh/setup-uv@v6
 
     - name: Set up Python
-      run: uv python install 3.13
+      run: uv python install 3.15
 
     - name: Build package
       run: uv build
 
     - name: Publish package
-      run: uv publish --token=${{ secrets.PYPI_API_KEY }}
+      run: uv publish

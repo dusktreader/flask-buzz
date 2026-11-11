@@ -4,7 +4,6 @@ from typing import Any
 
 import flask
 import pytest
-
 from flask_buzz import FlaskBuzz
 
 
@@ -16,7 +15,6 @@ def stripped(text: str):
 
 
 class TestFlaskBuzz:
-
     def test_raise(self):
         with pytest.raises(FlaskBuzz) as err_info:
             raise FlaskBuzz("i failed")
@@ -42,6 +40,7 @@ class TestFlaskBuzz:
         """
 
         calls: list[tuple[str, Exception]] = []
+
         def task1(err: Exception):
             calls.append(("task1", err))
 
@@ -80,7 +79,6 @@ class TestFlaskBuzz:
         try:
             FlaskBuzz.debug = True
             response = client.get(flask.url_for("dangerous"))
-            pass
         finally:
             FlaskBuzz.debug = False
 

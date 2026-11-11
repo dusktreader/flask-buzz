@@ -1,7 +1,7 @@
 import inspect
+
 import flask
 import pytest
-
 from flask_buzz import FlaskBuzz
 
 
